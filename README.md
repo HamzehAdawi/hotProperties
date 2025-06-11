@@ -20,8 +20,6 @@ BUYER Accounts:
 
 ## Demo
 
-![Demo 1](https://github.com/user-attachments/assets/27cbce99-2a67-496a-9de4-8f3e01bb9a9a)
-
 
 
 https://github.com/user-attachments/assets/cbf875ef-3aa0-4ae1-9cda-cdd9fcf83ef6
