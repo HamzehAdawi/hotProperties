@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+  <meta charset="UTF-8">
+  <title>User Management</title>
+  <link rel="stylesheet" th:href="@{/css/dashboard_style.css}"/>
+  <link rel="stylesheet" th:href="@{/css/admin_style.css}"/>
+</head>
+<body>
+  <div th:replace="fragments :: header"></div>
+
+  <form method="get" th:action="@{/dashboard}">
+    <button id="dash_button" type="submit">To Dashboard</button>
+  </form>
+
+  <div class="container">
+    <h1>User Management</h1>
+
+    <div th:if="${successMessage}" class="success">
+      <p th:text="${successMessage}"></p>
+    </div>
+
+    <div th:if="${errorMessage}" class="failure">
+      <p th:text="${errorMessage}"></p>
+    </div>
+
+    <table>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Role</th>
+        <th>Actions</th>
+      </tr>
+      <tr th:each="user, u : ${users}">
+        <td th:text="${user.firstName} + ' ' + ${user.lastName}">Name</td>
+        <td th:text="${user.email}">Email</td>
+        <td th:text="${user.role}">Role</td>
+        <td style="text-align:center">
+          <form th:action="@{/admin/users/delete/} + ${user.id}" method="get">
+            <input type="hidden" name="userId" th:value="${user.id}">
+              <button type="submit" class="button-red">Delete</button>
+          </form>
+        </td>
+      </tr>
+    </table>
+
+    <a th:href="@{/dashboard}" style="text-decoration: none">← Back to Dashboard</a><br><br>
+  </div>
+
+  <div th:replace="fragments :: footer"></div>
+
+  <script>
+    function confirmDelete() {
+      const modal = document.getElementById('confirmDelete');
+      modal.style.display = "flex";
+      modal.style.justifyContent = "center";
+      modal.style.alignContent = "center";
+    }
+  </script>
+
+</body>
+</html>

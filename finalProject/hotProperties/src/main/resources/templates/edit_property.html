@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <title> Edit Properties </title>
+    <link rel="stylesheet" th:href="@{/css/dashboard_style.css}"/>
+</head>
+
+<body>
+    <div th:replace="fragments :: header"></div>
+
+    <header>
+        <form method="get" th:action="@{/dashboard}">
+            <button class="blue_button" id="dash_button" type="submit">Dashboard</button>
+        </form>
+    </header>
+
+
+
+    <div id="edit_box" class="box2">
+        <h1 style="font-size: 40px; text-align: center">Edit Property</h1>
+        <form id="addProp" method="post" th:action="@{/editProperty}" th:object="${newProperty}" enctype="multipart/form-data">
+            <div th:if="${successMessage}" class="success">
+                <p th:text="${successMessage}"></p>
+            </div>
+            <p style="text-align: center">( Leave as is if unchanged )</p>
+            <div class="inp_field">
+                <label for="title">Title</label>
+                <br>
+                <input class="inp_box" id="title" th:field="${property.title}" type="text"/>
+            </div>
+
+            <div class="inp_field">
+                <label for="price">Price</label>
+                <br>
+                <input class="inp_box" id="price" th:field="${property.price}" type="text"/>
+            </div>
+
+            <div class="inp_field">
+                <label for="location">Location</label>
+                <br>
+                <input class="inp_box" id="location" th:field="${property.location}" type="text"/>
+            </div>
+            <div class="inp_field">
+                <label for="size">Size (sq ft)</label>
+                <br>
+                <input class="inp_box" id="size" th:field="${property.size}" type="text"/>
+            </div>
+
+            <div class="inp_field">
+                <label for="description">Description</label>
+                <br>
+                <textarea id="description" th:field="${property.description}" style="font-size: 18px; width: 95%; height: 200px; resize: none">
+                    </textarea>
+            </div>
+            <input type="hidden" name="id" th:value="${property.id}" />
+            <br>
+            <label for="file" style="font-size: 20px; text-align: left">Attach image(s):  </label>
+            <input type="file" name="file" id="file" multiple accept="image/*"/>
+            <br>
+            <br>
+            <button id="prop_button" class="green_button" type="submit">Edit Property</button>
+        </form>
+
+        <h3 style="text-align: left; padding-left: 20px"> Existing Images </h3>
+
+        <div class="edit_images" style="text-align: left" th:each="image, img_count : ${property.getPropertyImages()}">
+
+            <form method="post" th:action="@{/deletePropertyImage}">
+                <button id="manage_del_prop" class="red_button" type="submit">-</button>
+                <img th:src="@{'../images/' + ${image.imageFileName}}" alt="property images" width="200" style="border-radius: 20px; padding-left: 15px">
+                <input type="hidden" name="propsid" th:value="${property.id}" />
+                <input type="hidden" name="imageId" th:value="${image.id}" />
+
+            </form>
+        </div>
+
+
+
+    </div>
+
+
+</body>
+
+</html>

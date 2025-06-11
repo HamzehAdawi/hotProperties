@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/5/w3.css">
+
+<head>
+  <title> Property View </title>
+  <link rel="stylesheet" th:href="@{/css/property_style.css}"/>
+</head>
+
+<body>
+<div th:replace="fragments :: header"> </div>
+<header>
+  <form method="get" th:action="@{/dashboard}">
+    <button id="dash_button" type="submit">Dashboard</button>
+  </form>
+</header>
+
+<div class = box1 >
+  <div class="success" th:if="${sent_agent_worked}">
+    <p th:text="${sent_agent_worked}"></p>
+  </div>
+  <div class="failure" th:if="${fail_message}">
+    <p th:text="${fail_message}"></p>
+  </div>
+  <h1 class="title" style="font-size: 50px" th:text="${property.title}"></h1>
+
+
+  <form method="get" th:action="@{/properties/remove/favorites/} + ${property.id}" th:if="${showRemoveFavoriteButton}">
+    <button class="remove_fav" type="submit">Remove from Favorites</button>
+  </form>
+
+  <form method="post" th:action="@{/favorites/add/} + ${property.id}" th:if="${showAddFavoriteButton}">
+    <button class="top_right_button" type="submit">Add to Favorites</button>
+  </form><br><br>
+
+  <h1 class="property_text" th:text="'Price: &emsp;&emsp;&emsp;&emsp;&nbsp; $' + ${property.price}"></h1>
+  <h1 class="property_text" th:text="'Location: &emsp;&emsp;&emsp;' + ${property.location}"></h1>
+  <h1 class="property_text" th:text="'Sq. Ft.: &emsp;&emsp;&emsp;&emsp;' + ${property.size}"></h1>
+  <h1 class="property_text" th:text="'Description: '"></h1>
+  <h1 class="description" th:text="${property.description}"></h1><br>
+  <h1 class="property_text" style="font-size: 30px" th:text="'Property Images'"></h1>
+
+  <div class="w3-content w3-display-container">
+    <div th:each="image, props : ${property.getPropertyImages()}">
+      <img class="mySlides" th:src="@{/images/} + ${image.imageFileName}" style="width:100%"></img>
+    </div>
+
+    <button class="w3-button w3-black w3-display-left" onclick="plusDivs(-1)">&#10094;</button>
+    <button class="w3-button w3-black w3-display-right" onclick="plusDivs(1)">&#10095;</button>
+  </div><br><br>
+
+  <div id="message_form">
+    <h2 > Contact the Agent</h2>
+    <br>
+    <form method="post" th:action="@{/buyer/sendMessageToAgent}">
+      <label for="msg"></label>
+      <textarea name="msg" id="msg" placeholder="Type your message here." style="width: 1450px; height: 150px"></textarea>
+      <input hidden name="prop" th:value="${property.id}">
+
+      <div id="message_button">
+        <button class="blue_button" type="submit" style="width: 150px; top: 20px">Send Message</button>
+      </div>
+    </form>
+  </div>
+
+  <ul class="no-bullets">
+    <li class=links>
+      <a th:href="@{/properties/list}" style="color: #0056b3; text-decoration: none">Back to Listings</a>
+    </li>
+  </ul><br><br>
+
+</div><br><br><br>
+
+<script>
+  var slideIndex = 1;
+  showDivs(slideIndex);
+
+  function plusDivs(n) {
+    showDivs(slideIndex += n);
+  }
+
+  function showDivs(n) {
+    var i;
+    var x = document.getElementsByClassName("mySlides");
+    if (n > x.length) {slideIndex = 1}
+    if (n < 1) {slideIndex = x.length}
+    for (i = 0; i < x.length; i++) {
+      x[i].style.display = "none";
+    }
+    x[slideIndex-1].style.display = "block";
+  }
+</script>
+
+</body>
+
+</html>

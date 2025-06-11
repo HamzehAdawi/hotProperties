@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <title> Manage Properties </title>
+    <link rel="stylesheet" th:href="@{/css/dashboard_style.css}"/>
+</head>
+
+<body>
+    <div th:replace="fragments :: header"></div>
+    <header>
+        <form method="get" th:action="@{/dashboard}">
+            <button class="blue_button" id="dash_button" type="submit">Dashboard</button>
+        </form>
+    </header>
+
+    <div id="manage_box">
+        <h1 style="font-size: 55px; margin-top: -100px"> Manage Your Properties </h1>
+        <div>
+            <div class="success" th:if="${success_message}">
+                <p th:text="${success_message}"></p>
+            </div>
+            <div class="success" th:if="${successMessage}">
+                <p th:text="${successMessage}"></p>
+            </div>
+            <div class="failure" th:if="${fail_message}">
+                <p th:text="${fail_message}"></p>
+            </div>
+        </div>
+
+        <table class="manage_table" >
+            <thead>
+
+            <tr class="top_row">
+                <th>Title</th>
+                <th >Price</th>
+                <th>Location</th>
+                <th>Size</th>
+                <th>Images</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+
+            <tbody>
+
+            <tr th:each="property, props : ${user.getProperty()}">
+                <td th:text="${property.title}"></td>
+                <td th:text="'$' + ${property.price}"></td>
+                <td th:text="${property.location}"></td>
+                <td th:text="${property.size} + ' sq ft'"></td>
+                <td id="pics" >
+                    <div th:each="propertyImage : ${property.getPropertyImages()}">
+                        <img th:src="@{'../images/' + ${propertyImage.imageFileName}}" alt="property images" width="200" style="border-radius: 20px; padding-left: 15px">
+                    </div>
+                </td>
+                <td style="padding: 20px; column-gap: 10px; text-align: center">
+                    <form method="get" th:action="@{/editProperty}">
+                        <input type="hidden" name="title" th:value="${property.title}" />
+                        <button id="edit_prop" class="blue_button" type="submit">Edit</button>
+                    </form>
+                    <br>
+                    <form method="post" th:action="@{/deleteProperty}">
+                        <input type="hidden" name="id" th:value="${property.id}" />
+                        <button id="del_prop" class="red_button" type="submit">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+    </div>
+
+    <br>
+    <a th:href="@{/properties/add}" style= "font-size: 20px; color: #0056b3">Add Another Property</a>
+    <br>
+    <br>
+    <a th:href="@{/dashboard}" style= "font-size: 20px; color: #0056b3"> Back to Dashboard</a>
+</body>
+
+</html>

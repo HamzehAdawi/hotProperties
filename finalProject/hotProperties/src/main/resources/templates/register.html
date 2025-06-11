@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <title>Register - Hot Properties</title>
+    <link rel="stylesheet" th:href="@{/css/login.css}"/>
+    <style>
+        .role-select {
+            margin: 10px 0;
+            padding: 8px;
+            width: 100%;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .password-requirements {
+            font-size: 0.8em;
+            color: #666;
+            margin: 5px 0;
+        }
+        .password-container {
+            position: relative;
+        }
+        .toggle-password {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #666;
+            padding: 0;
+            font-size: 14px;
+        }
+        .toggle-password:hover {
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+<div class="login-container">
+    <div th:if="${successMessage}" class="success">
+        <p th:text="${successMessage}"></p>
+    </div>
+    <div th:if="${errorMessage}" class="failure">
+        <p th:text="${errorMessage}"></p>
+    </div>
+    <h1>Create Account</h1>
+    <form method="post" th:action="@{/register}" th:object="${user}">
+        <label for="firstName">First Name</label>
+        <input id="firstName" th:field="*{firstName}" type="text" required/>
+        
+        <label for="lastName">Last Name</label>
+        <input id="lastName" th:field="*{lastName}" type="text" required/>
+        
+        <label for="email">Email</label>
+        <input id="email" th:field="*{email}" type="email" required/>
+        
+        <label for="password">Password</label>
+        <div class="password-container">
+            <input id="password" th:field="*{password}" type="password" required/>
+            <button type="button" class="toggle-password" onclick="togglePassword('password')">Show</button>
+        </div>
+        
+        <label for="confirmPassword">Confirm Password</label>
+        <div class="password-container">
+            <input id="confirmPassword" name="confirmPassword" type="password" required/>
+            <button type="button" class="toggle-password" onclick="togglePassword('confirmPassword')">Show</button>
+        </div>
+
+        <button type="submit">Register</button>
+    </form>
+    <p class="login-link">Already have an account? <a th:href="@{/login}">Login here</a></p>
+</div>
+
+<script>
+function togglePassword(inputId) {
+    const passwordInput = document.getElementById(inputId);
+    const toggleButton = passwordInput.nextElementSibling;
+    
+    if (passwordInput.type === "password") {
+        passwordInput.type = "text";
+        toggleButton.textContent = "Hide";
+    } else {
+        passwordInput.type = "password";
+        toggleButton.textContent = "Show";
+    }
+}
+</script>
+</body>
+</html> 

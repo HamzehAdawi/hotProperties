@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Add New Agent</title>
+    <link rel="stylesheet" th:href="@{/css/dashboard_style.css}"/>
+    <link rel="stylesheet" th:href="@{/css/admin_style.css}"/>
+</head>
+<body>
+    <div th:replace="fragments :: header"></div>
+
+    <form method="get" th:action="@{/dashboard}">
+        <button id="dash_button" type="submit">To Dashboard</button>
+    </form>
+
+    <div class="container">
+        <h1>Create a New Agent</h1>
+        <div th:if="${successMessage}" class="success">
+            <p th:text="${successMessage}"></p>
+        </div>
+        <div th:if="${failureMessage}" class="failure">
+            <p th:text="${failureMessage}"></p>
+        </div>
+        <form method="post" th:action="@{/admin/users/create-agent}" th:object="${user}">
+            <label><input type="text" th:field="*{firstName}" placeholder="First Name"> </label>
+            <div th:if="${#fields.hasErrors('firstName')}" class="failure" th:errors="*{firstName}"></div>
+
+            <label><input type="text" th:field="*{lastName}" placeholder="Last Name"> </label>
+            <div th:if="${#fields.hasErrors('lastName')}" class="failure" th:errors="*{lastName}"></div>
+
+            <label><input type="email" th:field="*{email}" placeholder="Email"> </label>
+            <div th:if="${#fields.hasErrors('email')}" class="failure" th:errors="*{email}"></div>
+
+            <label><input type="password" th:field="*{password}" placeholder="Password"> </label>
+            <div th:if="${#fields.hasErrors('password')}" class="failure" th:errors="*{password}"></div>
+
+            <div>
+                <button type="submit" class="button-blue" style="width: 50%">Create Agent</button>
+            </div>
+        </form>
+    </div>
+
+    <div th:replace="fragments :: footer"></div>
+
+</body>
+</html>

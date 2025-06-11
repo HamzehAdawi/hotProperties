@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+  <link rel="stylesheet" th:href="@{/css/dashboard_style.css}"/>
+  <title>Messages (Buyer)</title>
+</head>
+<body>
+  <div th:replace="fragments :: header"></div>
+  <header>
+    <form method="get" th:action="@{/dashboard}">
+      <button class="blue_button" id="dash_button" type="submit">Dashboard</button>
+    </form>
+  </header>
+
+  <div id="manage_box">
+    <h1 style="font-size: 55px; margin-top: -100px"> My Messages </h1>
+
+    <table class="manage_table" >
+      <thead>
+
+      <tr class="top_row">
+        <th>Property</th>
+        <th>Your Message</th>
+        <th>Sent At</th>
+        <th>Agent Reply</th>
+        <th>Actions</th>
+      </tr>
+      </thead>
+
+      <tbody>
+      <tr th:each="message, messages : ${messages}">
+        <td th:text="${message.property.title}"></td>
+        <td th:text="${message.message}"></td>
+        <td th:text="${message.timestamp}"></td>
+        <td th:text="${message.reply}"></td>
+        <td>
+          <div id="msg_buttons">
+            <form method="post" th:action="@{/deleteMessageBuyer}">
+              <button id="del_prop" class="red_button" type="submit">Delete</button>
+              <input hidden name="id" th:value="${message.id}">
+            </form>
+          </div>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+
+  </div>
+  <div class="footer" th:replace="fragments :: footer"></div>
+
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+  <title> View Message </title>
+  <link rel="stylesheet" th:href="@{/css/dashboard_style.css}"/>
+</head>
+
+<body>
+<div th:replace="fragments :: header"></div>
+
+<header>
+  <form method="get" th:action="@{/dashboard}">
+    <button class="blue_button" id="dash_button" type="submit">Dashboard</button>
+  </form>
+</header>
+
+
+
+<div id="edit_box" class="box2" style="width: 1200px; text-align: left; padding-left: 100px; padding-right: 100px">
+  <h1 style="font-size: 40px; text-align: center">Message Details</h1>
+  <br>
+  <br>
+
+  <h3>Property: </h3>
+  <p th:text="${message.property.title}"></p>
+  <h3>From: </h3>
+  <p th:text="${message.sender.getFirstName()} + ' ' + ${message.sender.getLastName()} "></p>
+  <h3>Sent At: </h3>
+  <p th:text="${message.timestamp}"></p>
+
+  <hr class="divider_line" style="width: 1200px">
+
+  <h3>Message:</h3>
+  <p th:text="${message.message}"></p>
+
+  <br>
+  <br>
+
+  <h2> Reply to Buyer </h2>
+
+  <div id="message_deits">
+    <form method="post" th:action="@{/replyToBuyer}">
+      <div class="space" style="padding-bottom: 20px">
+        <label for="reply"></label>
+        <textarea name="reply" id="reply" placeholder="Type your reply here." style="width: 1200px; height: 150px; font-family: Arial, sans-serif; font-size: 20px"></textarea>
+      </div>
+      <input hidden name="messageId" th:value="${message.id}">
+      <button class="blue_button" type="submit" >Submit Reply</button>
+
+    </form>
+  </div>
+
+
+  <div style="text-align: center; padding-bottom: 20px">
+    <a class="links" style="text-align: center; font-size: 22px" th:href="@{/messages}"> Back to Messages</a>
+  </div>
+</div>
+
+
+</body>
+
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+  <title> Browse Properties </title>
+  <link rel="stylesheet" th:href="@{/css/property_style.css}"/>
+</head>
+
+<body>
+  <div th:replace="fragments :: header"></div>
+  <header>
+    <form method="get" th:action="@{/dashboard}">
+      <button id="dash_button" type="submit">Dashboard</button>
+    </form>
+  </header>
+  <h1 style="font-size: 40px" th:text= "'Available Properties (' + ${count} + ')'"> Available Properties</h1>
+
+  <form id="filter" method="get" th:action="@{/properties/search}">
+    <ul class="filter_list">
+      <li>
+        <label class="filter">Zip Code</label><br>
+        <input class="text_field" name="zipcode" type="number" min="10000">
+      </li>
+    </ul>
+
+    <ul class="no-bullets">
+      </li>
+        <label class="filter">Min Sq. Ft.</label><br>
+        <input class="text_field" name="minSqFt" type="number" min="1">
+      </li>
+    </ul>
+
+    <ul class="no-bullets">
+      </li>
+        <label class="filter">Min Price</label><br>
+        <input class="text_field" name="minPrice" type="number" min="1">
+      </li>
+    </ul>
+
+    <ul class="no-bullets">
+      </li>
+        <label class="filter">Max Price</label><br>
+        <input class="text_field" name="maxPrice" type="number" min="1">
+      </li>
+    </ul>
+
+    <ul class="no-bullets">
+      </li>
+        <label class="filter">Sort by:</label><br>
+          <select class="text_field" name="sort">
+            <option value="lowToHigh">Price: Low to High</option>
+            <option value="highToLow">Price: High to Low</option>
+          </select>
+      </li>
+    </ul>
+
+    <button class="search" type="submit">Search</button>
+
+    <button class="clear" type="reset">Clear</button><br><br>
+  </form><br><br>
+
+
+  <div class = box1 th:each="property, props : ${properties}">
+    <img class="image" th:src="'../images/' + ${property.getPropertyImages().getFirst().getImageFileName()}"
+         alt="Default Image" />
+    <h1 class="title" th:text="${property.title}"></h1>
+    <h1 class="property_text" th:text="'Price: $' + ${property.price}"></h1>
+    <h1 class="property_text" th:text="'Location: ' + ${property.location}"></h1>
+    <h1 class="property_text" th:text="'Sq. Ft.: ' + ${property.size}"></h1><br><br>
+    <form method="get" th:action="@{/properties/view/} + ${property.id}">
+      <button class="button" type="submit">View Details</button><br><br>
+    </form>
+  </div><br><br><br>
+
+
+
+</body>
+
+</html>

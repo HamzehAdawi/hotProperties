@@ -1,0 +1,129 @@
+body {
+    padding-top: 100px;
+    font-family: Arial, sans-serif;
+    background-color: rgba(41, 41, 41, 0.09);
+    margin: auto;
+    width: 100%;
+    align-content: center;
+    text-align: center;
+    background-image:  url('../images/house-bg.png');
+}
+
+.profile_text {
+    margin-left: 5%;
+    font-size:25px;
+    text-align: left;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+label {
+    color: #555;
+    font-size: 0.9rem;
+    margin-bottom: 0.25rem;
+}
+
+input {
+    margin-left: 5%;
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+input:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
+.header {
+    height: 100px;
+    padding-right: 10px;
+    text-align: right;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.76);
+    position: fixed;
+    top: 0;
+}
+
+.footer{
+    height: 70px;
+    text-align: left;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.76);
+    position: fixed;
+    bottom: 0;
+    margin-left: 5px;
+}
+
+.box1 {
+    margin: 0 auto;
+    width: 40%;
+    text-align: center;
+    border-radius: 10px;
+    padding: 20px;
+    background-color: rgb(241, 241, 241);
+    border: 3px solid rgba(0, 74, 161, 0.66);
+    position: relative;
+}
+
+#dash_button {
+    width: 10%;
+    padding: 10px;
+    background-color: #007BFF;
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    position: absolute;
+    right: 200px;
+    top: 30px;
+}
+
+#dash_button:hover {
+    background-color: #0056b3;
+}
+
+.right_button {
+    padding: 10px;
+    background-color: #808080;
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    position: absolute;
+    right: 60px;
+    bottom: 20px;
+}
+
+.left_button {
+    padding: 10px;
+    background-color: #007BFF;
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    position: absolute;
+    left: 70px;
+    bottom: 20px;
+}
+
+right_button:hover {
+    background-color: #0056b3;
+}
+
+#logo {
+    height: 120px;
+    width: 120px;
+    position: absolute;
+    left: 30px;
+    top: 1px;
+}

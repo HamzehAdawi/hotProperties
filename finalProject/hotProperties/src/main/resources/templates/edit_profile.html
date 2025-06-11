@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+  <title> Edit Profile </title>
+  <link rel="stylesheet" th:href="@{/css/dashboard_style.css}"/>
+</head>
+
+<body>
+  <div th:replace="fragments :: header"></div>
+
+  <header>
+    <form method="get" th:action="@{/dashboard}">
+      <button class="blue_button" id="dash_button" type="submit">Dashboard</button>
+    </form>
+  </header>
+
+
+
+  <div class="box3">
+    <h1 style="font-size: 35px; padding-bottom: 30px">Edit Your Profile</h1>
+
+    <div class="failure" th:if="${failed}">
+      <p th:text="${failed}"></p>
+    </div>
+    <div class="success" th:if="${update}">
+      <p th:text="${update}"></p>
+    </div>
+    <form id="edit_profile" method="post" th:action="@{/editProfile}" th:object="${newUser}" enctype="multipart/form-data">
+
+      <div class="inp_field">
+        <label for="firstName">First Name</label>
+        <br>
+        <input th:placeholder="${oldUser.firstName}"  class="inp_box" id="firstName" th:field="${newUser.firstName}" type="text"/>
+      </div>
+
+      <div class="inp_field">
+        <label for="lastName">Last Name</label>
+        <br>
+        <input th:placeholder="${oldUser.lastName}" class="inp_box" id="lastName" th:field="${newUser.lastName}" type="text" />
+      </div>
+
+
+      <br>
+      <div class="edit_buttons">
+        <button id="save_changes" class="green_button" type="submit">Save</button>
+
+
+      </div>
+
+    </form>
+    <form method="get" th:action="@{/myProfile}">
+      <button class="blue_button" id="Cancel" type="submit">Cancel</button>
+    </form>
+  </div>
+
+  <div class="footer" th:replace="fragments :: footer"></div>
+</body>
+
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <title> Add Properties </title>
+    <link rel="stylesheet" th:href="@{/css/dashboard_style.css}"/>
+</head>
+
+<body>
+    <div th:replace="fragments :: header"></div>
+
+    <header>
+        <form method="get" th:action="@{/dashboard}">
+            <button class="blue_button" id="dash_button" type="submit">Dashboard</button>
+        </form>
+    </header>
+
+
+
+    <div class="box2">
+        <h1 style="font-size: 40px">Add a New Property</h1>
+        <div class="failure" th:if="${fail_message}">
+            <p th:text="${fail_message}"></p>
+        </div>
+        <form id="addProp" method="post" th:action="@{/properties/add}" th:object="${property}" enctype="multipart/form-data">
+
+            <div class="inp_field">
+                <label for="title">Title</label>
+                <br>
+                <input placeholder="New House" class="inp_box" id="title" th:field="*{title}" type="text"/>
+            </div>
+
+            <div class="inp_field">
+                <label for="size">Size (sq ft)</label>
+                <br>
+                <input placeholder="1400" class="inp_box" id="size" th:field="*{size}" type="text"/>
+            </div>
+
+            <div class="inp_field">
+                <label for="price">Price</label>
+                <br>
+                <input placeholder="150000" class="inp_box" id="price" th:field="*{price}" type="text"/>
+            </div>
+
+            <div class="inp_field">
+                <label for="location">Location</label>
+                <br>
+                <input placeholder="New House 1234 St" class="inp_box" id="location" th:field="*{location}" type="text"/>
+            </div>
+
+            <div class="inp_field">
+                <label for="description">Description</label>
+                <br>
+                <textarea placeholder="Description" id="description" th:field="*{description}" style="font-size: 18px; width: 95%; height: 200px; resize: none">
+                </textarea>
+            </div>
+
+            <br>
+            <label for="file" style="font-size: 20px; text-align: left">Attach image(s):  </label>
+            <input type="file" name="file" id="file" multiple accept="image/*"/>
+            <br>
+            <br>
+            <br>
+            <button id="prop_button" class="green_button" type="submit">Add Property</button>
+        </form>
+    </div>
+
+</body>
+
+</html>

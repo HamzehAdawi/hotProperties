@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <title>Login - Hot Properties</title>
+    <link rel="stylesheet" th:href="@{/css/login.css}"/>
+    <style>
+        .login-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .login-link a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+        .password-container {
+            position: relative;
+        }
+        .toggle-password {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #666;
+            padding: 0;
+            font-size: 14px;
+        }
+        .toggle-password:hover {
+            color: #333;
+        }
+    </style>
+</head>
+
+<body>
+<div class="login-container">
+    <div th:if="${successMessage}" class="success">
+        <p th:text="${successMessage}"></p>
+    </div>
+    <div th:if="${errorMessage}" class="failure">
+        <p th:text="${errorMessage}"></p>
+    </div>
+    <div th:if="${error}" class="failure">
+        <p th:text="${error}"></p>
+    </div>
+    <h1>Welcome Back</h1>
+    <form method="post" th:action="@{/login}" th:object="${user}">
+        <label for="username">Email</label>
+        <input id="username" th:field="*{email}" type="email" required/>
+        
+        <label for="password">Password</label>
+        <div class="password-container">
+            <input id="password" th:field="*{password}" type="password" required/>
+            <button type="button" class="toggle-password" onclick="togglePassword('password')">Show</button>
+        </div>
+
+        <button type="submit">Log In</button>
+    </form>
+    <p class="login-link">Don't have an account? <a th:href="@{/register}">Register here</a></p>
+
+</div>
+
+<script>
+function togglePassword(inputId) {
+    const passwordInput = document.getElementById(inputId);
+    const toggleButton = passwordInput.nextElementSibling;
+    
+    if (passwordInput.type === "password") {
+        passwordInput.type = "text";
+        toggleButton.textContent = "Hide";
+    } else {
+        passwordInput.type = "password";
+        toggleButton.textContent = "Show";
+    }
+}
+</script>
+
+<div th:replace="fragments :: footer"></div>
+</body>
+
+</html>

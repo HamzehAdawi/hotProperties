@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+  <title> Dashboard </title>
+  <link rel="stylesheet" th:href="@{/css/dashboard_style.css}"/>
+</head>
+
+<body >
+
+  <div th:replace="fragments :: header"></div>
+
+
+  <div class = box1 >
+
+    <h1 id="welcome" th:utext= " 'Welcome back to your dashboard,<br>' + ${user.firstName} + ' ' +  ${user.lastName} + '!' " > </h1>
+    <div style="width: 80%; margin: 0 auto" th:if="${update}" class="success">
+      <p th:text="${update}"></p>
+    </div>
+    <hr class="divider_line">
+    <h1  id="acc_role" style="font-size: 20px"> Account Role:
+      <span id="roleString" th:text="${user.role}"></span>
+    </h1>
+
+
+
+    <ul class="no-bullets">
+
+      <li >
+        <a id="my_profile" th:href="@{/myProfile}" class="tabs" style="color: #0056b3">My profile</a>
+      </li>
+
+      <li  th:if="${#authorization.expression('hasRole(''AGENT'')')}">
+        <a id="manage_props" class="tabs"  th:href="@{/properties/manage}" style="color: #0056b3">Manage Properties</a>
+      </li>
+
+      <li  th:if="${#authorization.expression('hasRole(''AGENT'')')}">
+        <a id="add_props" class="tabs"  th:href="@{/properties/add}" style="color: #0056b3">Add Properties</a>
+      </li>
+
+      <li th:if="${#authorization.expression('hasRole(''AGENT'')')}">
+        <a class="tabs"  id="message" th:href="@{/messages}" style="color: #0056b3" th:text= "'Messages (' + ${messageCountAgent} + ')'">Messages</a>
+      </li>
+
+      <li class="links" th:if="${#authorization.expression('hasRole(''BUYER'')')}">
+        <a id="messageBuyer" class="tabs" th:href="@{/messagesBuyer}" style="color: #0056b3;" th:text= "'My Messages (' + ${messageCountBuyer} + ')'">My Messages</a>
+      </li>
+
+      <li class=links th:if="${#authorization.expression('hasRole(''BUYER'')')}">
+        <a class="tabs" id="browseProp"  th:href="@{/properties/list}" style="color: #0056b3;">Browse Properties</a>
+      </li>
+      <li class=links th:if="${#authorization.expression('hasRole(''BUYER'')')}">
+          <a class="tabs" id="favs"  th:href="@{/favorites}" style="color: #0056b3;" th:text= "'Favorites (' + ${favCount} + ')'">Favorites</a>
+      </li>
+
+        <li class=links th:if="${#authorization.expression('hasRole(''ADMIN'')')}">
+            <a th:href="@{/admin/users}" style="color: #0056b3; text-decoration: none">Manage Users</a>
+        </li>
+        <li class=links th:if="${#authorization.expression('hasRole(''ADMIN'')')}">
+            <a th:href="@{/admin/users/create-agent}" style="color: #0056b3; text-decoration: none">Create Agent</a>
+        </li>
+    </ul>
+    <br>
+    <br>
+
+    <form method="get" th:action="@{/login}">
+      <button class="red_button" type="submit">Log out</button>
+    </form>
+
+    <br>
+  </div>
+
+  <div th:replace="fragments :: footer"></div>
+</body>
+
+
+
+
+</html>

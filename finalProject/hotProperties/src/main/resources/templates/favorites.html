@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+  <title> Favorites </title>
+  <link rel="stylesheet" th:href="@{/css/property_style.css}"/>
+</head>
+
+<body>
+<div th:replace="fragments :: header"></div>
+<header>
+  <form method="get" th:action="@{/dashboard}">
+    <button id="dash_button" type="submit">Dashboard</button>
+  </form>
+</header>
+
+<div class = box1 >
+  <h1 style="font-size: 40px"> My Favorite Properties</h1>
+  <div th:each="property, props : ${properties}">
+    <img class="image" th:src="'../images/' + ${property.getPropertyImages().getFirst().getImageFileName()}"
+         alt="Default Image" />
+    <h1 class="title" th:text="${property.title}"></h1>
+    <h1 class="property_text" th:text="'Price: $' + ${property.price}"></h1>
+    <h1 class="property_text" th:text="'Location: ' + ${property.location}"></h1>
+    <h1 class="property_text" th:text="'Sq. Ft.: ' + ${property.size}"></h1><br><br>
+    <form method="get" th:action="@{/properties/view/} + ${property.id}">
+      <button class="button" type="submit">View Details</button>
+    </form>
+
+    <form method="get" th:action="@{/favorites/remove/} + ${property.id}">
+      <button class="red_button" type="submit">Remove</button><br><br>
+    </form>
+  </div>
+
+  <ul class="dashboard_link">
+    <li class=links>
+      <a  th:href="@{/dashboard}" style="color: #0056b3; text-decoration: none">Back to Dashboard</a>
+    </li>
+  </ul><br><br>
+
+</div><br><br><br>
+
+<div th:replace="fragments :: footer"></div>
+
+</body>
+
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/css/login.css}"/>
+</head>
+<body>
+    <div class="header" th:fragment="header">
+        <header>
+            <h1 style="text-transform: capitalize;"></h1>
+            <img id = "logo" th:src="@{/images/logo.png}">
+
+        </header>
+    </div>
+
+    <div class="footer" th:fragment="footer">
+        <footer style="color: #000000" >
+                Authors: Hamzeh | Zach | Madeleine | Joe
+            <br>&copy; 2025 Hot Properties <br>
+        </footer>
+    </div>
+</body>
+</html>
