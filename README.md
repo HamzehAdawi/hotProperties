@@ -17,16 +17,15 @@ AGENT Accounts:
 BUYER Accounts:
 - Able to search and browse available properteis, contact agents, favortie properties, etc.
 - Created by anyone through register page
-    
+
+## Demo
+
+![Demo 1](https://github.com/user-attachments/assets/27cbce99-2a67-496a-9de4-8f3e01bb9a9a)
+
+
+
 ## Additional Features
 (1) Messaging, (2) Favorites, (3) Deleting Properties and Users, (4) Browse Property Filters
-
-
-
-
-
-
-
 
 ## Contribution Summary
 - config
