@@ -24,6 +24,10 @@ BUYER Accounts:
 
 
 
+https://github.com/user-attachments/assets/cbf875ef-3aa0-4ae1-9cda-cdd9fcf83ef6
+
+
+
 ## Additional Features
 (1) Messaging, (2) Favorites, (3) Deleting Properties and Users, (4) Browse Property Filters
 
