@@ -20,7 +20,7 @@ BUYER Accounts:
 
 ## Demo
 
-
+AGENT Demo
 
 https://github.com/user-attachments/assets/8ae20c32-1858-43fa-b00c-6ffd8fbfcf94
 
@@ -28,6 +28,17 @@ https://github.com/user-attachments/assets/8ae20c32-1858-43fa-b00c-6ffd8fbfcf94
 
 https://github.com/user-attachments/assets/cbf875ef-3aa0-4ae1-9cda-cdd9fcf83ef6
 
+BUYER Demo
+
+
+https://github.com/user-attachments/assets/de603d42-f81c-4550-abce-9ba1e7d0a689
+
+
+
+ADMIN Demo
+
+
+https://github.com/user-attachments/assets/e446cfe7-0f2d-4458-b135-4c7bee3e305d
 
 
 ## Additional Features
